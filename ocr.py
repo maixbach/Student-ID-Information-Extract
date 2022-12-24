@@ -53,8 +53,12 @@ class Cfg(Cfg):
         return config
 
 
-def ocr(img):
+def ocr(images):
     config = Cfg.load_update_config('vgg_transformer')
     detector = NewPredictor(config)
-    s = detector.predict(img)
-    return s
+    res = {}
+    for k, v in images.items():
+        img = v[1]
+        pred = detector.predict(img)
+        res[k] = pred
+    return res
