@@ -50,6 +50,7 @@ class Cfg(Cfg):
         config['cnn']['pretrained'] = False
         config['device'] = 'cuda:0'
         config['predictor']['beamsearch'] = False
+        return config
 
 
 def ocr(img):
