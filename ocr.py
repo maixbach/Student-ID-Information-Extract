@@ -42,19 +42,13 @@ class NewPredictor(Predictor):
             return s
 
 
-class Cfg(Cfg):
-    def load_update_config(self, name):
-        config = self.load_config_from_name(name)
-        config['vocab'] = cf.vocab
-        config['weights'] = cf.weights
-        config['cnn']['pretrained'] = False
-        config['device'] = 'cuda:0'
-        config['predictor']['beamsearch'] = False
-        return config
-
-
 def ocr(images):
-    config = Cfg.load_update_config('vgg_transformer')
+    config = Cfg.load_config_from_name('vgg_transformer')
+    config['vocab'] = cf.vocab
+    config['weights'] = cf.weights
+    config['cnn']['pretrained'] = False
+    config['device'] = 'cuda:0'
+    config['predictor']['beamsearch'] = False
     detector = NewPredictor(config)
     res = {}
     for k, v in images.items():
