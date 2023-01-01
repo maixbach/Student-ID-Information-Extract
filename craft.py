@@ -1,8 +1,5 @@
 # pip install yolov5==6.2.3
 import yolov5
-import cv2
-import numpy as np
-from PIL import Image as im
 import config as cf
 
 
@@ -23,13 +20,7 @@ def craft(img):
 
     # inference with test time augmentation
     results = model(img, augment=True)
-
-    # parse results
-    predictions = results.pred[0]
-    boxes = predictions[:, :4]  # x1, y1, x2, y2
-    scores = predictions[:, 4]
-    categories = predictions[:, 5]
-
+    
     # crop each box
     crops = results.crop(save=False)
 
